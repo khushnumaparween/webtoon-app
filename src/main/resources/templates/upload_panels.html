@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Panels</title>
+    <link rel="stylesheet" th:href="@{/css/pagestyles.css}">
+</head>
+<body>
+<h1>Upload Panels</h1>
+
+<form th:action="@{'/series/uploadPanels/' + ${episodeId}}"
+      method="post"
+      enctype="multipart/form-data">
+    <label>Upload Panel Images:</label>
+    <input type="file" name="images" multiple required>
+    <label>Episode Text (optional):</label>
+    <textarea name="panelText" rows="5" placeholder="Write text for this episode..."></textarea>
+    <button type="submit">Upload Panels</button>
+</form>
+
+<br>
+<a th:href="@{'/series/addEpisode/' + ${seriesId}}">Back to Episodes</a>
+<!--<a th:href="@{'/series/addEpisode/' + ${episodeId}}">Back to Episodes</a>-->
+</body>
+</html>

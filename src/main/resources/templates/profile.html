@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Profile</title>
+  <link rel="stylesheet" th:href="@{/css/profile.css}">
+
+  <style>
+    /* ---------- Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------- Body ---------- */
+body {
+    background-color: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ---------- Profile Container ---------- */
+.profile-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+/* ---------- Headings ---------- */
+.profile-container h2 {
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 24px;
+}
+
+/* ---------- Profile Image ---------- */
+.profile-image {
+    margin-bottom: 20px;
+}
+
+.profile-image img {
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    object-fit: cover;
+}
+
+/* ---------- File Input ---------- */
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+/* ---------- Form Groups ---------- */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ff6b81;
+    outline: none;
+}
+
+/* ---------- Button ---------- */
+button[type="submit"] {
+    background-color: #ff6b81;
+    color: #fff;
+    border: none;
+    margin-top: 0.85rem;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff4c61;
+}
+
+    /* ---------- Logout Button ---------- */
+.logout-btn {
+    background-color: #ff6b81;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #ff4c61;
+}
+  </style>
+</head>
+<body>
+<div class="profile-container">
+  <h2>Your Profile</h2>
+
+  <!-- Edit Form: show only if profileUpdated is false -->
+  <th:block th:if="${profileUpdated != true}">
+    <!-- content to show when profile not updated -->
+  </th:block>
+  <form th:if="${!profileUpdated}" th:action="@{/profile/update}" method="post" enctype="multipart/form-data">
+    <div class="profile-image">
+      <img th:src="${user.image != null} ? @{${user.image}} : @{/images/default.png}"
+           id="profilePreview" alt="Profile Image" width="150" height="150">
+    </div>
+    <input type="file" name="image" accept="image/*" onchange="previewImage(event)">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" name="name" th:value="${user.name}">
+    </div>
+    <div class="form-group">
+      <label>Username:</label>
+      <input type="text" name="username" th:value="${user.username}" readonly>
+    </div>
+    <div class="form-group">
+      <label>Bio:</label>
+      <textarea name="bio" rows="4" th:text="${user.bio}"></textarea>
+    </div>
+    <button type="submit">Update Profile</button>
+  </form>
+
+  <!-- Read-Only View: show after update -->
+  <div th:if="${profileUpdated}">
+    <div class="profile-image">
+      <img th:src="${user.image != null} ? @{${user.image}} : @{/images/default.png}"
+           alt="Profile Image" width="150" height="150">
+    </div>
+    <div class="form-group">
+      <label>Name:</label>
+      <p th:text="${user.name}"></p>
+    </div>
+    <div class="form-group">
+      <label>Username:</label>
+      <p th:text="${user.username}"></p>
+    </div>
+    <div class="form-group">
+      <label>Bio:</label>
+      <p th:text="${user.bio}"></p>
+    </div>
+    <!-- Edit Profile Button -->
+    <form th:action="@{/profile/edit}" method="get" style="margin-bottom: 10px;">
+      <button type="submit">Edit Profile</button>
+    </form>
+  </div>
+
+  <!-- Logout Button -->
+  <form th:action="@{/logout}" method="post">
+    <button type="submit" class="logout-btn">Logout</button>
+  </form>
+</div>
+
+<!--<div class="profile-container">-->
+<!--  <h2>Your Profile</h2>-->
+<!--  <form th:action="@{/profile/update}" method="post" enctype="multipart/form-data">-->
+<!--    <div class="profile-image">-->
+<!--      <img th:src="${user.image != null} ? @{${user.image}} : @{/images/default.png}"-->
+<!--           id="profilePreview" alt="Profile Image" width="150" height="150">-->
+<!--    </div>-->
+<!--    <input type="file" name="image" accept="image/*" onchange="previewImage(event)">-->
+<!--    <div class="form-group">-->
+<!--      <label>Name:</label>-->
+<!--      <input type="text" name="name" th:value="${user.name}">-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label>Username:</label>-->
+<!--      <input type="text" name="username" th:value="${user.username}" readonly>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label>Bio:</label>-->
+<!--      <textarea name="bio" rows="4" th:text="${user.bio}"></textarea>-->
+<!--    </div>-->
+<!--    <button type="submit">Update Profile</button>-->
+<!--  </form>-->
+
+<!--  &lt;!&ndash; Logout Button &ndash;&gt;-->
+<!--  <form th:action="@{/logout}" method="post" style="margin-top: 15px;">-->
+<!--    <button type="submit" style="-->
+<!--        background-color: #555;-->
+<!--        color: #fff;-->
+<!--        border: none;-->
+<!--        padding: 10px 18px;-->
+<!--        border-radius: 10px;-->
+<!--        cursor: pointer;-->
+<!--        font-size: 14px;-->
+<!--        transition: 0.3s;-->
+<!--    ">Logout</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+
+<script>
+  function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function(){
+          const output = document.getElementById('profilePreview');
+          output.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+</body>
+</html>

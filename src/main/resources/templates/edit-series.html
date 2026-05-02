@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Comic</title>
+    <link rel="stylesheet" th:href="@{/css/pagestyles.css}">
+</head>
+<body>
+
+<h1>Edit Comic</h1>
+
+<form th:action="@{'/series/update/' + ${series.id}}" method="post">
+
+    <input type="text" name="title" th:value="${series.title}" required>
+
+    <textarea name="description" th:text="${series.description}"></textarea>
+
+    <input type="text" name="genre" th:value="${series.genre}">
+
+    <button type="submit">Update Comic</button>
+
+</form>
+
+</body>
+</html>

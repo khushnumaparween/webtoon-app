@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Creator Notifications</title>
+    <link rel="stylesheet" th:href="@{/css/creator_notifications.css}">
+    <style>
+        body {
+            background-color: #e6f4ea; /* light green background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .notifications-container {
+            cursor:pointer;
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .notifications-container h2 {
+            color: #2e7d32; /* dark green */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .notifications-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .notifications-container li {
+            padding: 12px 15px;
+            border-bottom: 1px solid #c8e6c9; /* subtle green divider */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            border-radius: 6px;
+        }
+
+        .notifications-container li:hover {
+            background-color: #e8f5e9; /* slightly darker green on hover */
+        }
+
+        .notifications-container li span {
+            font-weight: 500;
+            color: #2e7d32;
+        }
+
+        .notifications-container li small {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        /* Empty state */
+        .empty-notifications {
+            text-align: center;
+            padding: 20px;
+            color: #388e3c;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="notifications-container">
+    <h2>Your Notifications</h2>
+    <ul>
+        <li th:each="notification : ${creatorNotifications}">
+            <span th:text="${notification.message}">abc has liked your xyz comic</span>
+            <small th:text="${notification.date.format(T(java.time.format.DateTimeFormatter).ofPattern('dd MMM yyyy HH:mm'))}">25 Mar 2026 18:20</small>
+        </li>
+    </ul>
+
+    <div th:if="${#lists.isEmpty(creatorNotifications)}" class="empty-notifications">
+        You have no notifications yet.
+    </div>
+</div>
+</body>
+</html>>

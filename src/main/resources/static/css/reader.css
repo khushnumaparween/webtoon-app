@@ -1,0 +1,64 @@
+/* Container for padding */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Episode title */
+.episode-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Each panel card */
+.panel-card {
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 25px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.panel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+/* Panel image */
+.panel-image {
+    width: 100%;
+    max-height: 500px; /* limit height */
+    object-fit: contain; /* maintain aspect ratio */
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Panel text */
+.panel-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 0;
+    background-color: tomato;
+    font-family: fangsong;
+}
+
+/* Back link */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #0056b3;
+}

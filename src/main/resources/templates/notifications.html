@@ -1,0 +1,103 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Notifications</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/notifications.css}">-->
+
+<!--    <style>-->
+<!--        .notifications-container {-->
+<!--    max-width: 600px;-->
+<!--    margin: 50px auto;-->
+<!--    background: #f4f4f4;-->
+<!--    padding: 20px;-->
+<!--    border-radius: 8px;-->
+<!--}-->
+
+<!--.notifications-container ul {-->
+<!--    list-style: none;-->
+<!--    padding: 0;-->
+<!--}-->
+
+<!--.notifications-container li {-->
+<!--    padding: 10px 0;-->
+<!--    border-bottom: 1px solid #ddd;-->
+<!--}-->
+
+<!--.notifications-container li small {-->
+<!--    display: block;-->
+<!--    color: #888;-->
+<!--    font-size: 0.9em;-->
+<!--}-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="notifications-container">-->
+<!--    <h2>Notifications</h2>-->
+<!--    <ul>-->
+
+<!--        <li th:each="notification : ${notifications}">-->
+<!--            <span th:text="${notification.message}">No message</span>-->
+<!--            <small th:if="${notification.date != null}"-->
+<!--                   th:text="${notification.date.format(T(java.time.format.DateTimeFormatter).ofPattern('dd MMM yyyy HH:mm'))}">No date</small>-->
+<!--        </li>-->
+
+
+
+
+<!--        <li th:each="notification : ${notifications}">-->
+<!--            <span th:text="${notification.message}"></span>-->
+<!--            <small th:text="${notification.date.format(T(java.time.format.DateTimeFormatter).ofPattern('dd MMM yyyy HH:mm'))}"></small>-->
+<!--&lt;!&ndash;            <small th:text="${#dates.format(notification.date, 'dd MMM yyyy HH:mm')}"></small>&ndash;&gt;-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notifications</title>
+    <link rel="stylesheet" th:href="@{/css/notifications.css}">
+    <style>
+        .notifications-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .notifications-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .notifications-container li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .notifications-container li small {
+            display: block;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+<div class="notifications-container">
+    <h2>Notifications</h2>
+    <ul>
+        <!-- Single loop for all notifications -->
+        <li th:each="notification : ${notifications}">
+            <span th:text="${notification.message}">No message</span>
+            <small th:if="${notification.date != null}"
+                   th:text="${notification.date.format(T(java.time.format.DateTimeFormatter).ofPattern('dd MMM yyyy HH:mm'))}">No date</small>
+        </li>
+        <!-- Show a message if there are no notifications -->
+        <li th:if="${notifications.size() == 0}">No notifications to display</li>
+    </ul>
+</div>
+</body>
+</html>

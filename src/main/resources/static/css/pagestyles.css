@@ -1,0 +1,259 @@
+/* ---------- General Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ---------- Top Bar ---------- */
+.top-bar {
+    background-color: #3f51b5;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.top-bar .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.top-bar .top-icons a {
+    margin-left: 1rem;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.top-bar .top-icons a:hover {
+    transform: scale(1.2);
+}
+
+/* ---------- Dashboard Container ---------- */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+ h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center; /* centered heading */
+}
+
+ h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    color: #555;
+    text-align: center; /* centered subheading */
+}
+
+/* ---------- Series List Grid ---------- */
+.series-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* ---------- Series Card ---------- */
+.series-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.series-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.series-cover {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.series-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.series-info h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #222;
+}
+
+.series-info p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+/* ---------- Action Buttons ---------- */
+.action-buttons {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.edit-btn { background-color: #4caf50; }
+.edit-btn:hover { background-color: #388e3c; }
+
+.add-episode-btn { background-color: #2196F3; }
+.add-episode-btn:hover { background-color: #1976d2; }
+
+.delete-btn { background-color: #f44336; }
+.delete-btn:hover { background-color: #d32f2f; }
+
+/* ---------- Form Styling ---------- */
+.new-comic-form,
+form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: 450px;
+    margin: 2rem auto;  /* center horizontally */
+    text-align: center;  /* center headings and buttons inside form */
+}
+
+.new-comic-form input,
+.new-comic-form textarea,
+form input,
+form textarea {
+    padding: 0.7rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    text-align: left; /* input text left-aligned, can change to center */
+    transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.new-comic-form input:focus,
+.new-comic-form textarea:focus,
+form input:focus,
+form textarea:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+    outline: none;
+}
+
+.new-comic-form .create-btn,
+form button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 0.7rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.new-comic-form .create-btn:hover,
+form button:hover {
+    background-color: #388e3c;
+    transform: translateY(-1px);
+}
+
+/* ---------- Empty List Message ---------- */
+.empty-list {
+    padding: 1rem;
+    background-color: #fffbcc;
+    border: 1px solid #ffe58f;
+    border-radius: 8px;
+    text-align: center;
+    color: #555;
+    font-weight: 500;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: #3f51b5;
+    color: white;
+    margin-top: 2rem;
+}
+
+footer a {
+    color: #ffeb3b;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* ---------- Small responsive adjustments ---------- */
+@media (max-width: 768px) {
+    .series-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .series-cover {
+        width: 140px;
+        height: 180px;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .new-comic-form,
+    form {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+}

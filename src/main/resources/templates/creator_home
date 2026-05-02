@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Creator Dashboard</title>
+</head>
+<body>
+<h2>Welcome Creator!</h2>
+<a href="/logout">Logout</a>
+</body>
+</html>

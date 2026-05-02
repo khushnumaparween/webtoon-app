@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Creator Profile</title>
+  <link rel="stylesheet" th:href="@{/css/profile.css}">
+  <style>
+      /* ---------- Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------- Body ---------- */
+body {
+    background-color: #e6f4ea; /* light green shade */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ---------- Profile Container ---------- */
+.profile-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+/* ---------- Headings ---------- */
+.profile-container h2 {
+    margin-bottom: 5px;
+    color: #2e7d32; /* dark green */
+    font-size: 24px;
+}
+
+/* ---------- Profile Image ---------- */
+.profile-image {
+    margin-bottom: 20px;
+}
+
+.profile-image img {
+    border-radius: 50%;
+    border: 3px solid #81c784; /* green border */
+    object-fit: cover;
+}
+
+/* ---------- File Input ---------- */
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+/* ---------- Form Groups ---------- */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #388e3c; /* green label */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2e7d32;
+    outline: none;
+}
+
+/* ---------- Button ---------- */
+button[type="submit"] {
+    background-color: #4caf50; /* green */
+    color: #fff;
+    border: none;
+    margin-top: 0.85rem;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #388e3c; /* darker green */
+}
+
+/* ---------- Logout Button ---------- */
+.logout-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #388e3c;
+}
+    /* creator-specific styling  */
+  </style>
+</head>
+<body>
+<div class="profile-container">
+  <h2>Your Creator Profile</h2>
+
+  <!-- Edit Form -->
+  <form th:if="${!profileUpdated}" th:action="@{/series/creator/profile/update}" method="post" enctype="multipart/form-data">
+<!--  <form th:if="${!profileUpdated}" th:action="@{/creator/profile/update}" method="post" enctype="multipart/form-data">-->
+    <div class="profile-image">
+      <img th:src="${user.image != null} ? @{${user.image}} : @{/images/default.png}"
+           id="profilePreview" alt="Profile Image" width="150" height="150">
+    </div>
+    <input type="file" name="image" accept="image/*" onchange="previewImage(event)">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" name="name" th:value="${user.name}">
+    </div>
+    <div class="form-group">
+      <label>Username:</label>
+      <input type="text" name="username" th:value="${user.username}" readonly>
+    </div>
+    <div class="form-group">
+      <label>Bio:</label>
+      <textarea name="bio" rows="4" th:text="${user.bio}"></textarea>
+    </div>
+    <button type="submit">Update Profile</button>
+  </form>
+
+  <!-- Read-only view -->
+  <div th:if="${profileUpdated}">
+    <div class="profile-image">
+      <img th:src="${user.image != null} ? @{${user.image}} : @{/images/default.png}"
+           alt="Profile Image" width="150" height="150">
+    </div>
+    <div class="form-group">
+      <label>Name:</label>
+      <p th:text="${user.name}"></p>
+    </div>
+    <div class="form-group">
+      <label>Username:</label>
+      <p th:text="${user.username}"></p>
+    </div>
+    <div class="form-group">
+      <label>Bio:</label>
+      <p th:text="${user.bio}"></p>
+    </div>
+    <!-- Read-only view Edit button -->
+    <form th:action="@{/series/creator/profile/edit}" method="get">
+<!--    <form th:action="@{/creator/profile/edit}" method="get">-->
+      <button type="submit">Edit Profile</button>
+    </form>
+  </div>
+
+  <form th:action="@{/logout}" method="post">
+    <button type="submit" class="logout-btn">Logout</button>
+  </form>
+</div>
+
+<script>
+  function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function(){
+          document.getElementById('profilePreview').src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+</body>
+</html>

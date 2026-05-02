@@ -1,0 +1,179 @@
+<!--<h2>❤️ Liked Series</h2>-->
+
+<!--<div class="grid">-->
+<!--    <div class="card" th:each="fav : ${likedList}">-->
+<!--        <img th:src="@{${fav.series.coverImage}}">-->
+<!--        <h3 th:text="${fav.series.title}"></h3>-->
+
+<!--        <a th:href="@{'/series/' + ${fav.series.id}}">-->
+<!--            Read-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<h2>🔖 Saved Series</h2>-->
+
+<!--<div class="grid">-->
+<!--    <div class="card" th:each="fav : ${savedList}">-->
+<!--        <img th:src="@{${fav.series.coverImage}}">-->
+<!--        <h3 th:text="${fav.series.title}"></h3>-->
+
+<!--        <a th:href="@{'/series/' + ${fav.series.id}}">-->
+<!--            Read-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Favorites</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+           /* background: #fff;*/
+            background:lightblue;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .cover-img {
+            width: 100%;
+            border-radius: 8px;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .card-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .read-btn { background-color: #4caf50; }
+        .unlike-btn { background-color: #f44336; }
+        .remove-btn { background-color: #ff9800; }
+
+        h2 { margin-top: 30px;
+        background-color: lightpink;
+         }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>📚 Your Favorites</h1>
+</header>
+
+<main>
+    <section>
+        <h2>❤️ Liked Series</h2>
+        <div class="grid">
+            <div class="card" th:each="fav : ${likedList}">
+                <img th:src="@{${fav.series.coverImage}}" alt="Cover Image" class="cover-img">
+                <h3 th:text="${fav.series.title}"></h3>
+
+                <div class="card-buttons">
+                    <a th:href="@{'/series/' + ${fav.series.id}}" class="btn read-btn">Read</a>
+
+                    <form th:action="@{/favorite/remove}" method="post" style="display:inline;">
+                        <input type="hidden" name="seriesId" th:value="${fav.series.id}" />
+                        <input type="hidden" name="type" value="LIKE" />
+                        <button type="submit" class="btn unlike-btn">Unlike</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>🔖 Saved Series</h2>
+        <div class="grid">
+            <div class="card" th:each="fav : ${savedList}">
+                <img th:src="@{${fav.series.coverImage}}" alt="Cover Image" class="cover-img">
+                <h3 th:text="${fav.series.title}"></h3>
+
+                <div class="card-buttons">
+                    <a th:href="@{'/series/' + ${fav.series.id}}" class="btn read-btn">Read</a>
+
+
+
+                    <form th:action="@{/favorite/remove}" method="post" style="display:inline;">
+                        <input type="hidden" name="seriesId" th:value="${fav.series.id}" />
+                        <input type="hidden" name="type" value="SAVE" />
+                        <button type="submit" class="btn remove-btn">Remove from Saved</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+<!--    <section>-->
+<!--        <h2>❤️ Liked Series</h2>-->
+<!--        <div class="grid">-->
+<!--            <div class="card" th:each="fav : ${likedList}">-->
+<!--                <img th:src="@{${fav.series.coverImage}}" alt="Cover Image" class="cover-img">-->
+<!--                <h3 th:text="${fav.series.title}"></h3>-->
+
+<!--                <div class="card-buttons">-->
+<!--                    <a th:href="@{'/series/' + ${fav.series.id}}" class="btn read-btn">-->
+<!--                        Read-->
+<!--                    </a>-->
+
+<!--                    <form th:action="@{/unfavorite}" method="post" style="display:inline;">-->
+<!--                        <input type="hidden" name="seriesId" th:value="${fav.series.id}" />-->
+<!--                        <input type="hidden" name="type" value="LIKE" />-->
+<!--                        <button type="submit" class="btn unlike-btn">Unlike</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    <section>-->
+<!--        <h2>🔖 Saved Series</h2>-->
+<!--        <div class="grid">-->
+<!--            <div class="card" th:each="fav : ${savedList}">-->
+<!--                <img th:src="@{${fav.series.coverImage}}" alt="Cover Image" class="cover-img">-->
+<!--                <h3 th:text="${fav.series.title}"></h3>-->
+
+<!--                <div class="card-buttons">-->
+<!--                    <a th:href="@{'/series/' + ${fav.series.id}}" class="btn read-btn">-->
+<!--                        Read-->
+<!--                    </a>-->
+
+<!--                    &lt;!&ndash; Updated action to /unsave &ndash;&gt;-->
+<!--                    <form th:action="@{/unsave}" method="post" style="display:inline;">-->
+<!--                        <input type="hidden" name="seriesId" th:value="${fav.series.id}" />-->
+<!--                        <button type="submit" class="btn remove-btn">Remove from Saved</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+</main>
+
+</body>
+</html>

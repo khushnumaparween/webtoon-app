@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Edit Panel</h2>
+<form th:action="@{'/series/editEpisode/' + ${episode.id}}" method="post">
+    <input type="text" name="title" th:value="${episode.title}" required>
+    <input type="number" name="episodeNumber" th:value="${episode.episodeNumber}" required>
+    <textarea name="episodeText" rows="6" required th:text="${episode.episodeText}"></textarea>
+    <button type="submit">Update Panel</button>
+</form>
+<a th:href="@{'/series/addEpisode/' + ${episode.series.id}}">Back</a>
+
+</body>
+</html>

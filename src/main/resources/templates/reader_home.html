@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reader Dashboard</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reader_home.css}">
+</head>
+<body>
+
+<!-- Header -->
+<header class="top-bar">
+    <div class="logo">WebtoonApp</div>
+    <form action="/search" method="get">
+        <input type="text" name="query" class="search-bar"
+               placeholder="Search comics, authors, genres">
+    </form>
+
+<!--    <input type="text" class="search-bar" placeholder="Search comics, authors, genres">-->
+
+    <div class="top-icons">
+        <a href="/profile">Profile</a>
+        <a href="/notifications">Notifications</a>
+    </div>
+</header>
+
+
+
+<!-- Featured Webtoons -->
+
+<section class="featured-section">
+    <h2>Featured Webtoons</h2>
+    <div class="carousel">
+        <div class="carousel-item" th:each="series : ${featuredList}">
+            <img th:src="@{${series.coverImage}}" alt="cover">
+            <h3 th:text="${series.title}"></h3>
+            <p th:text="${series.description}"></p>
+            <a th:href="@{'/series/' + ${series.id}}" class="read-btn">
+                Read
+            </a>
+
+
+
+
+            <div class="action-buttons">
+                <form th:action="@{'/series/like/' + ${series.id}}" method="post">
+                    <button type="submit" class="like-btn">
+                        ❤️ Like
+                    </button>
+                </form>
+
+                <form th:action="@{'/series/bookmark/' + ${series.id}}" method="post">
+                    <button type="submit" class="bookmark-btn">
+                        🔖 Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+    <!-- Genres (always visible) -->
+
+
+<section class="categories">
+    <h2>Genres</h2>
+    <div class="genre-tabs">
+        <a th:each="g : ${genres}" th:href="@{/reader_home(genre=${g})}">
+            <button th:text="${g}"></button>
+        </a>
+    </div>
+</section>
+
+<!-- Filtered Comics -->
+<div th:if="${selectedGenre != null}">
+    <h2 class="genre-heading">Showing: <span th:text="${selectedGenre}"></span></h2>
+    <div class="results-container">
+        <div th:each="comic : ${seriesList}" class="comic-card">
+            <img th:src="@{${comic.coverImage}}" alt="cover"/>
+            <h3 th:text="${comic.title}"></h3>
+            <p th:text="${comic.creator.username}"></p>
+            <a th:href="@{'/series/' + ${comic.id}}">
+                <button>Read</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Default Homepage (Featured / Continue / Recommendations) -->
+<div th:if="${selectedGenre == null}">
+    <!-- featured, continue, recommendations -->
+</div>
+
+
+
+<!-- Continue Reading -->
+<section class="continue-reading">
+    <h2>Continue Reading</h2>
+    <div class="reading-list" th:each="series : ${continueList}">
+        <img th:src="@{${series.coverImage}}" alt="Cover">
+        <div>
+            <h3 th:text="${series.title}"></h3>
+            <a th:href="@{'/series/' + ${series.id}}" class="read-btn">
+                Continue Reading
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Recommended -->
+
+<section class="recommended">
+    <h2>You May Like</h2>
+<div class="recommendation-list">
+    <div class="series-card" th:each="series : ${recommendations}">
+        <img th:src="@{${series.coverImage}}" alt="Cover">
+        <h3 th:text="${series.title}"></h3>
+
+        <a th:href="@{'/series/' + ${series.id}}" class="read-btn">
+            Read
+        </a>
+    </div>
+</div>
+</section>
+
+
+<!-- All Webtoons -->
+<section class="all-webtoons">
+    <h2>Available Webtoons</h2>
+    <div class="series-list">
+        <div class="series-card" th:each="series : ${seriesList}">
+            <img th:src="@{${series.coverImage}}" alt="Cover">
+            <h3 th:text="${series.title}"></h3>
+            <p th:text="${series.description}"></p>
+            <p>
+                Author:
+                <span th:text="${series.creatorId}"></span>
+            </p>
+            <p>
+                Genre:
+                <span th:text="${series.genre}"></span>
+            </p>
+            <a th:href="@{'/series/' + ${series.id}}" class="read-avail-btn">
+                Read
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+
+    <p>
+        © 2026 WebtoonApp |
+        <a href="/about">About</a> |
+        <a href="/contact">Contact</a> |
+        <a href="/terms">Terms</a> |
+        <a href="/privacy">Privacy</a>
+    </p>
+
+    <div class="social-icons">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+    </div>
+
+</footer>
+
+</body>
+</html>

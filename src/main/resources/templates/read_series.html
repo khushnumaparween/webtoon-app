@@ -1,0 +1,82 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title th:text="${episodeTitle}"></title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/read_series.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1 th:text="${series.title}"></h1>-->
+<!--<img th:src="@{${series.coverImage}}" width="200">-->
+<!--<p th:text="${series.description}"></p>-->
+<!--<p>-->
+<!--    Genre:-->
+<!--    <span th:text="${series.genre}"></span>-->
+<!--</p>-->
+<!--<h2 th:text="${episodeTitle}"></h2>-->
+<!--<p th:text="${episodeText}"></p>-->
+<!--<div th:each="panel : ${panels}">-->
+<!--    <img th:src="@{${panel.imageUrl}}" style="width:100%">-->
+<!--    <p th:if="${panel.panelText}" th:text="${panel.panelText}"></p>-->
+<!--</div>-->
+<!--<h3>Episodes</h3>-->
+<!--<div th:if="${#lists.isEmpty(episodes)}">-->
+<!--    <p>No episodes available yet.</p>-->
+<!--</div>-->
+<!--<div th:each="ep : ${episodes}">-->
+<!--    <h4 th:text="${ep.title}"></h4>-->
+<!--    <a th:href="@{/reader/readEpisode/{id}(id=${ep.id})}">-->
+<!--        Read-->
+<!--    </a>-->
+<!--</div>-->
+<!--&lt;!&ndash; Back button &ndash;&gt;-->
+<!--<a th:href="@{/reader/back(seriesId=${series.id})}" class="back-link">← Back</a>-->
+<!--&lt;!&ndash;<a href="/reader_home">Back</a>&ndash;&gt;-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${episodeTitle}"></title>
+    <link rel="stylesheet" th:href="@{/css/read_series.css}">
+</head>
+<body>
+
+<!-- Series Info Card -->
+<div class="series-info">
+    <h1 th:text="${series.title}"></h1>
+    <img th:src="@{${series.coverImage}}" width="200">
+    <p th:text="${series.description}"></p>
+    <p>
+        Genre:
+        <span th:text="${series.genre}"></span>
+    </p>
+</div>
+
+<!-- Episode Title & Text -->
+<h2 class="episode-title" th:text="${episodeTitle}"></h2>
+<p class="episode-text" th:text="${episodeText}"></p>
+
+<!-- Episode Panels -->
+<div th:each="panel : ${panels}" class="panel-card">
+    <img th:src="@{${panel.imageUrl}}">
+    <p th:if="${panel.panelText}" th:text="${panel.panelText}"></p>
+</div>
+
+<!-- Episodes List -->
+<h3>Episodes</h3>
+<div th:if="${#lists.isEmpty(episodes)}">
+    <p>No episodes available yet.</p>
+</div>
+<div th:each="ep : ${episodes}" class="episode-card">
+    <h4 th:text="${ep.title}"></h4>
+    <a th:href="@{/reader/readEpisode/{id}(id=${ep.id})}">
+        Read
+    </a>
+</div>
+
+<!-- Back Button -->
+<a th:href="@{/reader/back(seriesId=${series.id})}" class="back-link">← Back</a>
+
+</body>
+</html>

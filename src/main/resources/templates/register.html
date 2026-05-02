@@ -1,0 +1,211 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Register</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Create Account</h2>-->
+
+<!--<form id="registerForm">-->
+<!--    <input type="text" name="username" placeholder="Username" required>-->
+<!--    <br><br>-->
+<!--    <input type="email" name="email" placeholder="Email" required>-->
+<!--    <br><br>-->
+<!--    <input type="password" name="password" placeholder="Password" required>-->
+<!--    <br><br>-->
+<!--    <select name="role" required>-->
+<!--        <option value="READER">Reader</option>-->
+<!--        <option value="CREATOR">Creator</option>-->
+<!--    </select>-->
+<!--    <br><br>-->
+<!--    <button type="submit">Register</button>-->
+<!--</form>-->
+
+<!--<script>-->
+<!--    document.getElementById('registerForm').addEventListener('submit', function(e) {-->
+<!--        e.preventDefault(); // Prevent normal form submission-->
+
+<!--        const form = e.target;-->
+<!--        const data = {-->
+<!--            username: form.username.value,-->
+<!--            email: form.email.value,-->
+<!--            password: form.password.value,-->
+<!--            role: form.role.value-->
+<!--        };-->
+
+<!--        fetch('/api/auth/register', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json'-->
+<!--            },-->
+<!--            body: JSON.stringify(data)-->
+<!--        })-->
+<!--        .then(res => {-->
+<!--            if(res.ok) {-->
+<!--                alert('Registration successful! Redirecting to login.');-->
+<!--                window.location.href = '/login'; // redirect to login page-->
+<!--            } else {-->
+<!--                alert('Registration failed!');-->
+<!--            }-->
+<!--        })-->
+<!--        .catch(err => {-->
+<!--            console.error(err);-->
+<!--            alert('Error during registration!');-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <style>
+        /* ---------- Body & Background ---------- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: bgShift 12s ease infinite;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ---------- Card ---------- */
+        form#registerForm {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            width: 380px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form#registerForm:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 35px rgba(0,0,0,0.3);
+        }
+
+        /* ---------- Heading ---------- */
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        /* ---------- Inputs & Select ---------- */
+        form#registerForm input,
+        form#registerForm select {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form#registerForm input:focus,
+        form#registerForm select:focus {
+            border-color: #6a82fb;
+            box-shadow: 0 0 8px rgba(106, 130, 251, 0.5);
+        }
+
+        /* ---------- Button ---------- */
+        form#registerForm button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #6a82fb;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        form#registerForm button:hover {
+            background: #5b6de6;
+            transform: scale(1.05);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media(max-width: 420px) {
+            form#registerForm {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>Create Account</h2>
+
+<form id="registerForm">
+    <input type="text" name="username" placeholder="Username" required>
+    <br><br>
+    <input type="email" name="email" placeholder="Email" required>
+    <br><br>
+    <input type="password" name="password" placeholder="Password" required>
+    <br><br>
+    <select name="role" required>
+        <option value="READER">Reader</option>
+        <option value="CREATOR">Creator</option>
+    </select>
+    <br><br>
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent normal form submission
+
+        const form = e.target;
+        const data = {
+            username: form.username.value,
+            email: form.email.value,
+            password: form.password.value,
+            role: form.role.value
+        };
+
+        fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if(res.ok) {
+                alert('Registration successful! Redirecting to login.');
+                window.location.href = '/login'; // redirect to login page
+            } else {
+                alert('Registration failed!');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Error during registration!');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Webtoon Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<h1>Webtoons</h1>
+
+<div th:each="series : ${seriesList}">
+
+    <h3 th:text="${series.title}"></h3>
+
+    <p th:text="${series.description}"></p>
+
+    <a th:href="@{'/series/' + ${series.id}}">Read</a>
+
+    <hr>
+
+</div>
+
+</body>
+</html>

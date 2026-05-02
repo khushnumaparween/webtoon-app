@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Read Episode</title>
+    <link rel="stylesheet" th:href="@{/css/reader.css}">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${episodeTitle}" class="episode-title"></h1>
+
+    <div th:each="panel : ${panels}" class="panel-card">
+        <img th:src="@{${panel.imageUrl}}" alt="Panel Image" class="panel-image">
+        <p th:text="${panel.panelText}" class="panel-text"></p>
+    </div>
+
+    <a th:href="@{/reader/back(seriesId=${seriesId})}" class="back-link">← Back</a>
+<!--    <a th:href="@{'/series/addEpisode/' + ${seriesId}}" class="back-link">← Back to Episodes</a>-->
+<!--    <a href="/series" class="back-link">← Back to Dashboard</a>-->
+</div>
+</body>
+</html>
