@@ -117,21 +117,6 @@ public void save(Long userId, Long seriesId, String type) {
     }
 }
 
-//unfavorite
-
-//    public void remove(Long userId, Long seriesId, String type) {
-//
-//        boolean exists = favoriteRepository
-//                .existsByUserIdAndSeriesIdAndType(userId, seriesId, type);
-//
-//        if (exists) {
-//            favoriteRepository.deleteByUserIdAndSeriesIdAndType(userId, seriesId, type);
-//
-//            // OPTIONAL: notify creator (not recommended usually)
-//            // creators typically don’t get "unliked" notifications
-//        }
-//    }
-
 
     public void remove(Long userId, Long seriesId, String type) {
         Optional<Favorite> favOpt = favoriteRepository.findByUserIdAndSeriesIdAndType(userId, seriesId, type);

@@ -510,11 +510,6 @@ public class ReaderPageController {
     }
 
 
-
-
-
-
-
     // ================= Reader Notifications =================
     @GetMapping("/notifications")
     public String showNotifications(Model model, Authentication authentication) {
@@ -571,6 +566,7 @@ public class ReaderPageController {
         favoriteService.save(user.getId(), id, "BOOKMARK");
         return "redirect:/favorites";
     }
+
     private User getUser(Authentication auth) {
         String email = auth.getName();
         return userRepository.findByEmail(email)
@@ -578,89 +574,23 @@ public class ReaderPageController {
     }
 
 
-
-//
-//    //UNFAVORITE
-//    @PostMapping("/unfavorite")
-//    public String removeFavorite(@RequestParam Long seriesId,
-//                                 @RequestParam String type,
-//                                 Principal principal) {
-//
-////        User user = userRepository.findByEmail(principal.getName());
-//
-//
-//        User user = userRepository.findByEmail(principal.getName())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        favoriteService.remove(user.getId(), seriesId, type);
-//
-//        return "redirect:/series/" + seriesId;
-//    }
-//
-//
-//    //unsaving/remove from bookmarks
-//
-//    @PostMapping("/unsave")
-//    public String removeSavedSeries(@RequestParam Long seriesId,
-//                                    Principal principal) {
-//
-//        // Get the logged-in user
-//        User user = userRepository.findByEmail(principal.getName())
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        // Remove the favorite of type SAVE
-//        favoriteService.remove(user.getId(), seriesId, "SAVE");
-//
-//        // Redirect back to the favorites page
-//        return "redirect:/favorites";
-//    }
-//
-
-
-
     //UNFAV AND UNSAVE
 
-@PostMapping("/favorite/remove")
-public String removeFavorite(@RequestParam Long seriesId,
-                             @RequestParam String type,
-                             Principal principal) {
+    @PostMapping("/favorite/remove")
+    public String removeFavorite(@RequestParam Long seriesId,
+                                 @RequestParam String type,
+                                 Principal principal) {
 
-    User user = userRepository.findByEmail(principal.getName())
-            .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    // Map form type to DB type
-    String dbType = "SAVE".equalsIgnoreCase(type) ? "BOOKMARK" : type.toUpperCase();
+        // Map form type to DB type
+        String dbType = "SAVE".equalsIgnoreCase(type) ? "BOOKMARK" : type.toUpperCase();
 
-    favoriteService.remove(user.getId(), seriesId, dbType);
+        favoriteService.remove(user.getId(), seriesId, dbType);
 
-    // Always redirect to the favorites page
-    return "redirect:/favorites";
+        // Always redirect to the favorites page
+        return "redirect:/favorites";
+    }
 }
 
-
-//@PostMapping("/favorite/remove")
-//public String removeFavorite(@RequestParam Long seriesId,
-//                             @RequestParam String type,
-//                             Principal principal) {
-//
-//    User user = userRepository.findByEmail(principal.getName())
-//            .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//    // Map form type to DB type
-//    String dbType;
-//    if ("SAVE".equalsIgnoreCase(type)) {
-//        dbType = "BOOKMARK";
-//    } else {
-//        dbType = type.toUpperCase();
-//    }
-//
-//    favoriteService.remove(user.getId(), seriesId, dbType);
-//
-//    // Redirect depending on type
-//    if ("LIKE".equalsIgnoreCase(type)) {
-//        return "redirect:/favorites/" + seriesId;
-//    } else { // for SAVE/BOOKMARK
-//        return "redirect:/favorites";
-//    }
-//}
-}

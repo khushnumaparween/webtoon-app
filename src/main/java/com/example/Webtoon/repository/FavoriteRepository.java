@@ -9,28 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-//@Repository
-//public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
-//    boolean existsByUserAndSeriesAndType(User user, Series series, String type);
-//
-////    boolean existsByUserIdAndSeriesIdAndType(Long userId, Long seriesId, String type);
-//
-//    List<Favorite> findByUserAndType(User user, String like);
-//
-//
-//    //unfavorite
-//
-//    void deleteByUserIdAndSeriesIdAndType(Long userId, Long seriesId, String type);
-//
-//    boolean existsByUserIdAndSeriesIdAndType(Long userId, Long seriesId, String type);
-//
-//
-//    Optional<Favorite> findByUserIdAndSeriesIdAndType(Long userId, Long seriesId, String type);
-//
-//
-//    // unsave/ remove from bookmark
-//}
-
 
 
 @Repository

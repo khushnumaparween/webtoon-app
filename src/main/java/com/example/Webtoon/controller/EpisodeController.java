@@ -93,17 +93,8 @@ public class EpisodeController {
         return "redirect:/series/addEpisode/" + episode.getSeries().getId();
     }
 
-    // ---------- Delete Episode ----------
-//    @GetMapping("/deleteEpisode/{episodeId}")
-//    public String deleteEpisode(@PathVariable Long episodeId) {
-//        Episode episode = episodeRepository.findById(episodeId).orElse(null);
-//        if (episode != null) {
-//            panelRepository.deleteAllByEpisodeId(episodeId); // delete associated panels
-//            episodeRepository.delete(episode);
-//            return "redirect:/series/addEpisode/" + episode.getSeries().getId();
-//        }
-//        return "redirect:/series";
-//    }
+
+
 
     @Autowired
     private ReadingHistoryRepository readingHistoryRepository; // add this
@@ -132,7 +123,6 @@ public class EpisodeController {
 
     // ---------- Upload Panels ----------
 
-    //get method
     @GetMapping("/uploadPanels/{episodeId}")
     public String uploadPanelPage(@PathVariable Long episodeId, Model model) {
         Episode episode = episodeRepository.findById(episodeId)

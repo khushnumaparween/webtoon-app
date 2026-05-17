@@ -30,7 +30,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Wrap user role in GrantedAuthority
+        // Wrapping user role in GrantedAuthority
         return Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
     }
 

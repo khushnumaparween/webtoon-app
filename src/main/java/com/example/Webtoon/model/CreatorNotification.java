@@ -10,9 +10,9 @@ public class CreatorNotification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long creatorId;        // the recipient creator's user ID
-    private String message;        // e.g., "abc liked your xyz comic"
-    private LocalDateTime date;    // timestamp of the notification
+    private Long creatorId;
+    private String message;
+    private LocalDateTime date;
 
     public CreatorNotification() {}
 

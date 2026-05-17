@@ -66,7 +66,7 @@ public class ReaderSideController {
 
             if (existing.isPresent()) {
                 history = existing.get();
-                history.setEpisode(episode); // Optional: store episode entity instead of ID if your entity allows
+                history.setEpisode(episode);
                 history.setLastRead(LocalDateTime.now());
             } else {
                 history = new ReadingHistory();

@@ -125,7 +125,6 @@ button[type="submit"]:hover {
 
   <!-- Edit Form -->
   <form th:if="${!profileUpdated}" th:action="@{/series/creator/profile/update}" method="post" enctype="multipart/form-data">
-<!--  <form th:if="${!profileUpdated}" th:action="@{/creator/profile/update}" method="post" enctype="multipart/form-data">-->
     <div class="profile-image">
       <img th:src="${user.image != null} ? @{${user.image}} : @{/images/default.png}"
            id="profilePreview" alt="Profile Image" width="150" height="150">
@@ -166,7 +165,6 @@ button[type="submit"]:hover {
     </div>
     <!-- Read-only view Edit button -->
     <form th:action="@{/series/creator/profile/edit}" method="get">
-<!--    <form th:action="@{/creator/profile/edit}" method="get">-->
       <button type="submit">Edit Profile</button>
     </form>
   </div>

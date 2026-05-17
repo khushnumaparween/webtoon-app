@@ -30,23 +30,14 @@ public class SecurityConfig {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return username -> userRepository.findByEmail(username)
-//                .map(user -> org.springframework.security.core.userdetails.User
-//                        .withUsername(user.getEmail())
-//                        .password(user.getPassword())
-//                        .authorities(user.getRole())
-//                        .build())
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Add this bean if you haven’t already
+
     @Bean
     public CustomLoginSuccessHandler customLoginSuccessHandler() {
         return new CustomLoginSuccessHandler();

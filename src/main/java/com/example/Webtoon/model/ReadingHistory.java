@@ -21,7 +21,7 @@ public class ReadingHistory {
 
     @ManyToOne
     @JoinColumn(name = "episode_id")
-    private Episode episode; // add this instead of Long episodeId
+    private Episode episode;
 
     private LocalDateTime lastRead;
 }

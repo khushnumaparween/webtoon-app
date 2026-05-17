@@ -1,31 +1,3 @@
-//package com.example.Webtoon.repository;
-//import com.example.Webtoon.model.ReadingHistory;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//
-//import java.util.List;
-//
-//public interface ReadingHistoryRepository extends JpaRepository<ReadingHistory, Long> {
-//
-//    List<ReadingHistory> findTop5ByUserIdOrderByLastReadDesc(Long userId);
-//
-//}
-
-//
-//package com.example.Webtoon.repository;
-//import com.example.Webtoon.model.ReadingHistory;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//
-//import java.util.List;
-//import java.util.Optional;
-//
-//
-//public interface ReadingHistoryRepository extends JpaRepository<ReadingHistory, Long> {
-//
-//    List<ReadingHistory> findTop5ByUserIdOrderByLastReadDesc(Long userId);
-//
-//    Optional<ReadingHistory> findByUserIdAndSeriesId(Long userId, Long seriesId);
-//
-//}
 package com.example.Webtoon.repository;
 
 import com.example.Webtoon.model.ReadingHistory;

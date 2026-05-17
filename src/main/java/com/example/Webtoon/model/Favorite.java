@@ -27,22 +27,3 @@ public class Favorite {
 
 
 
-
-
-//
-//@Setter
-//@Getter
-//@Entity
-//public class Favorite {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//
-//    private Long userId;
-//    private Long seriesId;
-//    private String type; // LIKE or BOOKMARK
-//
-//    // getters & setters
-//}
-
