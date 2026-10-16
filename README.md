@@ -1,144 +1,171 @@
-```md
 # 📚 Webtoon Platform
 
-A full-stack Spring Boot web application for reading, creating, and managing webtoons with features like user authentication, series creation, episodes, notifications, likes, bookmarks, and reading history.
+A full-stack web application built with **Java and Spring Boot** for reading, creating, and managing webtoons. The platform supports user authentication, series and episode management, bookmarks, likes, reading history, personalized recommendations, and notifications.
 
----
+## ✨ Features
 
-## 🚀 Features
+### 👤 User Management
+- User registration and login using Spring Security
+- Role-based access control for Readers and Creators
+- Profile management with name, bio, and profile image upload
 
-### 👤 User System
-- User registration and login (Spring Security)
-- Role-based access (Reader / Creator)
-- Profile management (name, bio, image upload)
+### 📖 Series and Episodes
+- Create and manage webtoon series with cover images
+- Publish and browse episodes
+- Explore featured and recommended webtoons
+- Filter series by genre
+- Search for webtoons by title or relevant keywords
 
-### 📖 Series & Episodes
-- Create new webtoon series with cover image
-- Add and view episodes
-- Browse featured, recommended, and genre-based series
-- Search functionality for series
+### ❤️ Reader Interactions
+- Like webtoon series
+- Bookmark favorite series
+- Track reading progress
+- Continue reading from where you left off
+- View personalized recommendations based on reading history
 
-### ❤️ Interaction Features
-- Like series
-- Bookmark (favorites system)
-- Continue reading tracking
-
-### 🔔 Notifications System
-- Notify users when:
-  - New series is published
-  - Creator posts new content
-- Personalized user notifications
-- Sorted by latest date
+### 🔔 Notifications
+- Notify users when a new series is published
+- Notify readers when creators publish new episodes
+- Display personalized notifications
+- Sort notifications by the latest date
 
 ### 📊 Reader Dashboard
-- Featured webtoons carousel
-- Continue reading section
-- Genre-based filtering
-- Recommendations based on reading history
-
----
+- Featured webtoon carousel
+- Continue Reading section
+- Genre-based browsing and filtering
+- Recommended series based on reading activity
 
 ## 🛠️ Tech Stack
 
-### Backend
-- Java 17+
-- Spring Boot
-- Spring MVC
-- Spring Security
-- Spring Data JPA
-- Hibernate
-
-### Frontend
-- Thymeleaf
-- HTML, CSS
-- JavaScript (basic interactivity)
-
-### Database
-- MySQL / MariaDB
-
-### Other Tools
-- Maven
-- File upload system for images
-
----
+| Category | Technologies |
+|---|---|
+| Language | Java 17+ |
+| Backend | Spring Boot, Spring MVC |
+| Security | Spring Security |
+| ORM | Spring Data JPA, Hibernate |
+| Frontend | Thymeleaf, HTML, CSS, JavaScript |
+| Database | MySQL / MariaDB |
+| Build Tool | Maven |
+| File Handling | Image upload and storage |
 
 ## 📂 Project Structure
 
+```text
+webtoon/
+├── src/
+│   ├── main/
+│   │   ├── java/com/example/webtoon/
+│   │   │   ├── config/
+│   │   │   ├── controller/
+│   │   │   ├── model/
+│   │   │   ├── repository/
+│   │   │   ├── service/
+│   │   │   └── WebtoonApplication.java
+│   │   └── resources/
+│   │       ├── static/
+│   │       │   ├── css/
+│   │       │   ├── js/
+│   │       │   └── images/
+│   │       ├── templates/
+│   │       └── application.properties
+│   └── test/
+├── pom.xml
+└── README.md
 ```
 
-com.example.Webtoon
-├── controller
-├── model
-├── repository
-├── service
-├── config
-├── WebtoonApplication.java
+## ⚙️ Getting Started
 
-````
+### Prerequisites
 
----
+Ensure the following are installed:
 
-## ⚙️ Setup Instructions
+- Java 17 or later
+- Maven
+- MySQL or MariaDB
 
-### 1. Clone the repository
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/your-username/webtoon.git
 cd webtoon
-````
+```
 
-### 2. Configure Database
+### 2. Create the Database
 
-Update `application.properties`:
+Create a database in MySQL:
+
+```sql
+CREATE DATABASE webtoon_db;
+```
+
+### 3. Configure the Application
+
+Update `src/main/resources/application.properties`:
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/your_db
+spring.datasource.url=jdbc:mysql://localhost:3306/webtoon_db
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+
+server.port=8081
 ```
 
----
+Replace the database credentials with your local MySQL credentials.
 
-### 3. Run the project
+**Note:** `spring.jpa.hibernate.ddl-auto=update` is suitable for local development. For production, use a database migration tool such as Flyway or Liquibase.
+
+### 4. Run the Application
+
+Using Maven:
 
 ```bash
 mvn spring-boot:run
 ```
 
----
+Or build and run the JAR:
 
-### 4. Open in browser
-
+```bash
+mvn clean package
+java -jar target/webtoon-*.jar
 ```
+
+### 5. Open the Application
+
+Visit:
+
+```text
 http://localhost:8081
 ```
 
----
+## 🔗 Key Endpoints
 
-## 📌 Key Endpoints
+| Endpoint | Description |
+|---|---|
+| `/reader_home` | Reader dashboard |
+| `/series/{id}` | View a webtoon and its episodes |
+| `/search` | Search webtoon series |
+| `/profile` | View or manage the user profile |
+| `/notifications` | View personal notifications |
 
-* `/reader_home` → Main dashboard
-* `/series/{id}` → View series & episodes
-* `/search` → Search series
-* `/profile` → User profile
-* `/notifications` → User notifications
+*Note: These endpoints describe the planned application routes and should match the actual controller mappings in the implementation.*
 
----
+## 🚀 Future Improvements
 
-## 💡 Future Improvements
-
-* Real-time notifications (WebSocket)
-* Comment system for episodes
-* Advanced recommendation engine
-* Pagination for series feed
-* REST API + React frontend version
-
----
+- Real-time notifications using WebSockets
+- Episode-level comments and discussions
+- Advanced recommendation engine
+- Pagination and sorting for series feeds
+- REST API with a React frontend
+- Cloud-based image storage
+- Automated tests and CI/CD integration
 
 ## 👩‍💻 Author
 
-Built by **Khushnuma Parween**
+**Khushnuma Parween**
 
 ---
+
+*Built with Java and Spring Boot.*
